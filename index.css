@@ -108,7 +108,8 @@
 
 .tiptap hr {
   border: 0;
-  border-top: 1px solid #525252;
+  border-top: 2px solid var(--text-color);
+  opacity: 0.1;
   margin: 1rem 0;
 }
 

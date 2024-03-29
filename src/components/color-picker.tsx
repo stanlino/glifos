@@ -4,7 +4,7 @@ import { colors, darkColors } from '../utils/colors'
 import Github from '@uiw/react-color-github'
 import { darken, readableColor } from 'polished'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { IoIosColorPalette } from 'react-icons/io'
+import { TbColorFilter } from 'react-icons/tb'
 
 export function ColorPicker(): JSX.Element {
   const [showColorPicker, setShowColorPicker] = useState(false)
@@ -32,7 +32,7 @@ export function ColorPicker(): JSX.Element {
         onClick={() => setShowColorPicker(true)}
         className="w-6 items-center hover:scale-110 transition-all flex justify-center"
       >
-        <IoIosColorPalette />
+        <TbColorFilter />
       </button>
       {showColorPicker && (
         <div className="absolute z-10 top-8 -right-2">
