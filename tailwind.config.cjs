@@ -6,6 +6,10 @@ module.exports = {
       colors: {
         'custom-primary': 'var(--primary-color)',
         'custom-text': 'var(--text-color)'
+      },
+      screens: {
+        'xxs': '260px',
+        'xs': '320px',
       }
     }
   },

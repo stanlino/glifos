@@ -39,7 +39,10 @@
         "skipTaskbar": true,
         "visible": false,
         "focus": false,
-        "transparent": true
+        "transparent": true,
+        "closable": false,
+        "minimizable": false,
+        "maximizable": false
       }
     ],
     "security": {

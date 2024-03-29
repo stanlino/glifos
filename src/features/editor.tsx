@@ -19,6 +19,7 @@ import { EditorButton } from '../components/editor-button'
 import Link from '@tiptap/extension-link'
 import { useEditorStore } from '../store/editor.store'
 import { useEffect, useState } from 'react'
+import { ResizableImage } from '../utils/tiptap/resizable-image'
 
 export function Editor(): JSX.Element | null {
   const { currentNoteID, getNote, updateNoteContent, deleteNote, notes } = useEditorStore()
@@ -46,7 +47,7 @@ export function Editor(): JSX.Element | null {
 
   return (
     <div className="h-full flex flex-col overflow-hidden relative">
-      <div className="flex-1 flex overflow-y-auto overflow-x-hidden">
+      <div className="flex-1 flex overflow-y-auto overflow-x-hidden text-sm xs:text-base">
         <EditorContent editor={editor} />
       </div>
       <div className="flex p-4 justify-between">
@@ -120,6 +121,7 @@ export function Editor(): JSX.Element | null {
 }
 
 const extensions = [
+  ResizableImage,
   StarterKit,
   Underline,
   TaskList,
