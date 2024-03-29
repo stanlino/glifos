@@ -1,8 +1,6 @@
-# Tauri + React + Typescript
+<div style="display:flex; flex-direction: row;">
+<img src="/screenshots/example1.png" height="400px" />
+<img src="/screenshots/example2.png" height="400px" />
+</div>
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
-
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
-# glifos
+### [Clique aqui para fazer o download do app](https://github.com/stanlino/glifos/raw/main/exe/glifos-setup.exe)
