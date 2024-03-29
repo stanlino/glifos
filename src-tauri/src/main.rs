@@ -1,9 +1,10 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+use auto_launch::AutoLaunchBuilder;
 use tauri::{App, CustomMenuItem, Error, Manager, PhysicalPosition, SystemTray, SystemTrayEvent, SystemTrayMenu};
-use tauri_plugin_autostart::MacosLauncher;
 use std::{sync::{atomic::AtomicBool, Mutex}, time::SystemTime};
+
 
 static WINDOW_ALWAYS_ON_TOP: AtomicBool = AtomicBool::new(false);
 static WINDOW_CLOSED_AT: Mutex<Option<SystemTime>> = Mutex::new(None);
@@ -79,11 +80,24 @@ fn update_always_on_top_state() {
     WINDOW_ALWAYS_ON_TOP.store(!WINDOW_ALWAYS_ON_TOP.load(std::sync::atomic::Ordering::SeqCst), std::sync::atomic::Ordering::SeqCst);
 }
 
+fn setup_auto_launch(app: &App) -> Result<(), Error> {
+    let app_name = &app.package_info().name;
+    let current_exe = std::env::current_exe().unwrap();
+    let auto_start = AutoLaunchBuilder::new()
+        .set_app_name(&app_name)
+        .set_app_path(&current_exe.to_str().unwrap())
+        .build()
+        .unwrap();
+
+    auto_start.enable().unwrap();
+    Ok(())
+}
+
 fn main() {
     WINDOW_CLOSED_AT.lock().unwrap().replace(SystemTime::now());
     tauri::Builder::default()
-        .plugin(tauri_plugin_autostart::init(MacosLauncher::LaunchAgent, Some(vec![])))
         .setup(|app| {
+            setup_auto_launch(&app).unwrap();
             setup_system_tray(&app).unwrap();
             setup_window(&app).unwrap();
             Ok(())
