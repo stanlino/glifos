@@ -3,11 +3,9 @@
 
 use auto_launch::AutoLaunchBuilder;
 use tauri::{App, CustomMenuItem, Error, Manager, PhysicalPosition, SystemTray, SystemTrayEvent, SystemTrayMenu};
-use std::{sync::{atomic::AtomicBool, Mutex}, time::SystemTime};
-
+use std::sync::atomic::AtomicBool;
 
 static WINDOW_ALWAYS_ON_TOP: AtomicBool = AtomicBool::new(false);
-static WINDOW_CLOSED_AT: Mutex<Option<SystemTime>> = Mutex::new(None);
 
 fn setup_system_tray(app: &App) -> Result<(), Error> {
     let handle = app.handle();
@@ -20,13 +18,12 @@ fn setup_system_tray(app: &App) -> Result<(), Error> {
             SystemTrayEvent::LeftClick { .. } => {
                 let window = handle.get_window("main").unwrap();
                 if window.is_visible().unwrap() {
-                    window.hide().unwrap();
-                } else {
-                    if let Some(closed_at) = *WINDOW_CLOSED_AT.lock().unwrap() {
-                        if closed_at.elapsed().unwrap().as_millis() < 250 {
-                            return;
-                        }
+                    if window.is_focused().unwrap() {
+                        window.hide().unwrap();
+                    } else {
+                        window.set_focus().unwrap();
                     }
+                } else {
                     window.show().unwrap();
                     window.set_focus().unwrap();
                 }
@@ -62,16 +59,6 @@ fn setup_window(app: &App) -> Result<(), Error> {
         },
         Err(e) => println!("err: {}", e),
     }
-    let handle = app.handle();
-    window.on_window_event(move |event| {
-        if let tauri::WindowEvent::Focused(false) = event {
-            if !WINDOW_ALWAYS_ON_TOP.load(std::sync::atomic::Ordering::SeqCst) {
-                WINDOW_CLOSED_AT.lock().unwrap().replace(SystemTime::now());
-                let window = handle.get_window("main").unwrap();
-                window.hide().unwrap();
-            }
-        }
-    });
     Ok(())
 }
 
@@ -88,13 +75,11 @@ fn setup_auto_launch(app: &App) -> Result<(), Error> {
         .set_app_path(&current_exe.to_str().unwrap())
         .build()
         .unwrap();
-
     auto_start.enable().unwrap();
     Ok(())
 }
 
 fn main() {
-    WINDOW_CLOSED_AT.lock().unwrap().replace(SystemTime::now());
     tauri::Builder::default()
         .setup(|app| {
             setup_auto_launch(&app).unwrap();
