@@ -15,11 +15,11 @@ export function EditorsDropdown(): JSX.Element {
   return (
     <Menu as="div" className="relative">
       <div className="flex items-center px-2 gap-2">
-        <span ref={invisibleSpanRef} className="opacity-0 h-0 pointer-events-none absolute" />
+        <span ref={invisibleSpanRef} className="opacity-0 h-0 text-sm pointer-events-none absolute" />
         <input
           type="text"
           defaultValue={getNote(currentNoteID)?.title || 'Sem título'}
-          className="bg-transparent text-custom-text outline-none min-w-10 max-w-60"
+          className="bg-transparent text-custom-text text-sm outline-none min-w-10 max-w-60"
           key={currentNoteID}
           onChange={(e) => updateNoteTitle(currentNoteID, e.currentTarget.value)}
           ref={(ref) => {
