@@ -3,4 +3,4 @@
 <img src="/screenshots/example2.png" height="400px" />
 </div>
 
-### [Clique aqui para fazer o download do app](/exe/glifos-setup.msi)
+### [Clique aqui para fazer o download do app](https://github.com/stanlino/glifos/raw/main/exe/glifos-setup.exe)

@@ -7,7 +7,7 @@
   },
   "package": {
     "productName": "glifos",
-    "version": "0.0.0"
+    "version": "1.0.0"
   },
   "tauri": {
     "allowlist": {
@@ -59,7 +59,10 @@
         "icons/128x128@2x.png",
         "icons/icon.icns",
         "icons/icon.ico"
-      ]
+      ],
+      "category": "Utility",
+      "longDescription": "Glifos is a simple app to help you manage your notes and tasks.",
+      "publisher": "Stanlino"
     }
   }
 }
