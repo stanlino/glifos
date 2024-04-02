@@ -1,11 +1,11 @@
 import { Menu } from '@headlessui/react'
-import { useEditorStore } from '../store/editor.store'
-import { useSettingsStore } from '../store/settings.store'
+import { useEditorStore } from '../../store/editor.store'
+import { useSettingsStore } from '../../store/settings.store'
 import { darken, lighten } from 'polished'
 import { useRef } from 'react'
 import { TbCheck, TbChevronDown } from 'react-icons/tb'
 
-export function EditorsDropdown(): JSX.Element {
+export function EditorSelect(): JSX.Element {
   const { currentNoteID, getNote, notes, setCurrentNoteID, updateNoteTitle, addNote } =
     useEditorStore()
   const { primaryColor } = useSettingsStore()
@@ -53,7 +53,7 @@ export function EditorsDropdown(): JSX.Element {
           <button
             onClick={addNote}
             className="flex items-center w-full px-2 py-2 text-sm text-white hover:brightness-110"
-            style={{ backgroundColor: darken(0.15, primaryColor) }}
+            style={{ backgroundColor: darken(0.1, primaryColor) }}
           >
             Criar novo
           </button>

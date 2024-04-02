@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react'
-import { cn } from '../utils/cn'
+import { cn } from '../../utils/cn'
 
 export function EditorButton(props: ComponentProps<'button'>): JSX.Element {
   return (

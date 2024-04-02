@@ -14,6 +14,9 @@ dependencies:
   '@headlessui/react':
     specifier: ^1.7.18
     version: 1.7.18(react-dom@18.2.0)(react@18.2.0)
+  '@tiptap/core':
+    specifier: ^2.2.4
+    version: 2.2.4(@tiptap/pm@2.2.4)
   '@tiptap/extension-image':
     specifier: ^2.2.4
     version: 2.2.4(@tiptap/core@2.2.4)
@@ -30,6 +33,9 @@ dependencies:
     specifier: ^2.2.4
     version: 2.2.4(@tiptap/core@2.2.4)(@tiptap/pm@2.2.4)
   '@tiptap/extension-task-list':
+    specifier: ^2.2.4
+    version: 2.2.4(@tiptap/core@2.2.4)
+  '@tiptap/extension-text-style':
     specifier: ^2.2.4
     version: 2.2.4(@tiptap/core@2.2.4)
   '@tiptap/extension-underline':
@@ -1137,6 +1143,14 @@ packages:
 
   /@tiptap/extension-task-list@2.2.4(@tiptap/core@2.2.4):
     resolution: {integrity: sha512-URh1Yzj/YZBOMkobK4/U8s1QYwIIqHm4b0YadLPPZx9IzTjyV/2bvIakphCmBtxWxeTXW5TbO9eNod3qatq21w==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.2.4(@tiptap/pm@2.2.4)
+    dev: false
+
+  /@tiptap/extension-text-style@2.2.4(@tiptap/core@2.2.4):
+    resolution: {integrity: sha512-8Mcxy+HUHPUgK7bOv34m8zhbhzPm6f1/hgbgwz9m+Oel7MNPElsMXtxxygbwtr7Hbj6S4NBoBl/Ir4BkziYRbQ==}
     peerDependencies:
       '@tiptap/core': ^2.0.0
     dependencies:

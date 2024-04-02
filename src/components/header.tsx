@@ -1,8 +1,8 @@
 import { useCallback, useReducer } from 'react'
 import { TbPinned, TbPinnedFilled, TbPlus } from 'react-icons/tb'
-import { ColorPicker } from '../components/color-picker'
+import { SettingsPopup } from './settings-popup'
 import { useEditorStore } from '../store/editor.store'
-import { EditorsDropdown } from './editors-dropdown'
+import { EditorSelect } from '../features/editor/editor-select'
 import { invoke, window as w } from '@tauri-apps/api'
 
 export function Header(): JSX.Element {
@@ -18,7 +18,7 @@ export function Header(): JSX.Element {
   return (
     <header data-tauri-drag-region className="bg-white bg-opacity-30 text-custom-text h-9 px-2 flex justify-between items-center">
       <div className="flex gap-2 items-center">
-        {notes.length > 1 && <EditorsDropdown />}
+        {notes.length > 1 && <EditorSelect />}
         {notes.length <= 1 && (
           <button
             onClick={addNote}
@@ -29,7 +29,7 @@ export function Header(): JSX.Element {
         )}
       </div>
       <div className="flex gap-2 px-1">
-        <ColorPicker />
+        <SettingsPopup />
         <button
           onClick={handleToggleWindowPin}
           className="w-6 items-center hover:scale-110 transition-all flex justify-center"

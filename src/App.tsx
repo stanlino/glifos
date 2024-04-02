@@ -1,5 +1,5 @@
-import { Editor } from './features/editor'
-import { Header } from './features/header'
+import { Editor } from './features/editor/editor'
+import { Header } from './components/header'
 
 function App(): JSX.Element {
   return (
