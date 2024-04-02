@@ -8,6 +8,7 @@ use std::{sync::{atomic::AtomicBool, Mutex}, time::SystemTime};
 static WINDOW_ALWAYS_ON_TOP: AtomicBool = AtomicBool::new(false);
 static WINDOW_LOST_FOCUS_AT: Mutex<Option<SystemTime>> = Mutex::new(None);
 static IGNORE_UNFOCUS_UNTIL: Mutex<Option<SystemTime>> = Mutex::new(None);
+static WINDOW_NEVER_OPENED: AtomicBool = AtomicBool::new(true);
 
 fn setup_system_tray(app: &App) -> Result<(), Error> {
     let handle = app.handle();
@@ -19,7 +20,11 @@ fn setup_system_tray(app: &App) -> Result<(), Error> {
             match event {
             SystemTrayEvent::LeftClick { .. } => {
                 if WINDOW_LOST_FOCUS_AT.lock().unwrap().unwrap().elapsed().unwrap().as_millis() < 250 {
-                    return;
+                    if WINDOW_NEVER_OPENED.load(std::sync::atomic::Ordering::SeqCst) {
+                        WINDOW_NEVER_OPENED.store(false, std::sync::atomic::Ordering::SeqCst);
+                    } else {
+                        return;
+                    }
                 }
                 let window = handle.get_window("main").unwrap();
                 if window.is_visible().unwrap() {
