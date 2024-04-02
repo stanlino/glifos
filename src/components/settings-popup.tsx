@@ -5,10 +5,12 @@ import Github from '@uiw/react-color-github'
 import { darken, lighten, readableColor } from 'polished'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { TbCheck, TbSettings, TbTextSize } from 'react-icons/tb'
+import { getVersion } from '@tauri-apps/api/app'
 
 export function SettingsPopup(): JSX.Element {
-  const [showColorPicker, setShowColorPicker] = useState(false)
+  const [appVersion, setAppVersion] = useState<string | null>()
 
+  const [showColorPicker, setShowColorPicker] = useState(false)
   const { primaryColor, setPrimaryColor, fontSize, setFontSize } = useSettingsStore()
 
   const ref = useRef<HTMLDivElement>(null)
@@ -28,6 +30,7 @@ export function SettingsPopup(): JSX.Element {
   useEffect(() => {
     handleColorPicker(primaryColor)
     handleSelectFontSize(fontSize)()
+    getVersion().then(setAppVersion)
   }, [])
 
   useOnClickOutside(ref, () => setShowColorPicker(false))
@@ -41,16 +44,16 @@ export function SettingsPopup(): JSX.Element {
         <TbSettings />
       </button>
       {showColorPicker && (
-        <div className="absolute z-10 top-11 p-1 right-3 rounded-lg flex gap-1 flex-col border border-custom-primary" style={{ backgroundColor: lighten(0.13, primaryColor) }}>
-          <div className='flex gap-2 text-sm p-1 text-custom-text items-center text-opacity-75'>
+        <div className="absolute z-10 top-11 p-1 px-2 right-3 rounded-lg flex gap-1 flex-col border border-custom-primary" style={{ backgroundColor: lighten(0.13, primaryColor) }}>
+          <div className='flex gap-2 text-sm py-1 text-custom-text items-center text-opacity-75'>
             <TbTextSize className="text-xl" />
-            <button data-checked={fontSize === 12} className='flex items-center gap-1 border flex-1 bg-white/20 rounded-md border-white/20 justify-center py-px data-[checked=true]:bg-white/50 data-[checked=true]:text-black' onClick={handleSelectFontSize(12)}>
+            <button data-checked={fontSize === 12} className='flex items-center gap-1 border flex-1 bg-white/20 rounded-md border-white/20 justify-center py-px data-[checked=true]:bg-white/50 data-[checked=true]:text-white' onClick={handleSelectFontSize(12)}>
               <span>12px</span>
             </button>
-            <button data-checked={fontSize === 14} className='flex items-center gap-1 border flex-1 bg-white/20 rounded-md border-white/20 justify-center py-px data-[checked=true]:bg-white/50 data-[checked=true]:text-black' onClick={handleSelectFontSize(14)}>
+            <button data-checked={fontSize === 14} className='flex items-center gap-1 border flex-1 bg-white/20 rounded-md border-white/20 justify-center py-px data-[checked=true]:bg-white/50 data-[checked=true]:text-white' onClick={handleSelectFontSize(14)}>
               <span>14px</span>
             </button>
-            <button data-checked={fontSize === 16} className='flex items-center gap-1 border flex-1 bg-white/20 rounded-md border-white/20 justify-center py-px data-[checked=true]:bg-white/50 data-[checked=true]:text-black' onClick={handleSelectFontSize(16)}>
+            <button data-checked={fontSize === 16} className='flex items-center gap-1 border flex-1 bg-white/20 rounded-md border-white/20 justify-center py-px data-[checked=true]:bg-white/50 data-[checked=true]:text-white' onClick={handleSelectFontSize(16)}>
               <span>16px</span>
             </button>
           </div>
@@ -78,6 +81,9 @@ export function SettingsPopup(): JSX.Element {
             placement={'' as unknown as undefined}
             style={{ width: 175, border: 'none', borderRadius: 4, overflow: 'hidden', padding: 0 }}
           />
+          <div className='flex gap-2 text-xs p-1 justify-center text-custom-text items-center opacity-50'>
+            <span>Glifos {appVersion}</span>
+          </div>
         </div>
       )}
     </div>

@@ -79,7 +79,6 @@ fn setup_window(app: &App) -> Result<(), Error> {
     }
     let handle = app.handle();
     window.on_window_event(move |event| {
-        println!("{:?}", event);
         if let tauri::WindowEvent::Focused(false) = event {
             if IGNORE_UNFOCUS_UNTIL.lock().unwrap().unwrap().elapsed().unwrap().as_secs() < 1 {
                 return;
@@ -89,6 +88,11 @@ fn setup_window(app: &App) -> Result<(), Error> {
                 window.hide().unwrap();
                 WINDOW_LOST_FOCUS_AT.lock().unwrap().replace(SystemTime::now());
             }
+        }
+        if let tauri::WindowEvent::CloseRequested { api, .. } = event {
+            api.prevent_close();
+            let window = handle.get_window("main").unwrap();
+            window.hide().unwrap();
         }
     });
     Ok(())

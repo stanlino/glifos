@@ -69,7 +69,7 @@
       "endpoints": [
         "https://raw.githubusercontent.com/stanlino/glifos/main/updates.json"
       ],
-      "dialog": true,
+      "dialog": false,
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDUxODk4NEY3RDQ5RTlERkQKUldUOW5aN1U5NFNKVVVPZmlGdFZKeFhZRDV3UHdGNjVWUkhLemhyLzZJSHk0U1BxNUZHUEkyNUoK"
     }
   }
