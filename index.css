@@ -84,7 +84,7 @@
 
 .tiptap ul[data-type='taskList'] li {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: calc(var(--font-size) / 2);
 }
 
@@ -94,7 +94,7 @@
 }
 
 .tiptap input[type='checkbox'] {
-  margin-top: calc(var(--font-size) / 5.5);
+  margin-top: calc(var(--font-size) / 3.55);
   border-radius: 8px;
   width: calc(var(--font-size) * 1.2);
   height: calc(var(--font-size) * 1.2);
