@@ -100,18 +100,18 @@ export function Editor(): JSX.Element | null {
             <Menu.Items style={{ backgroundColor: lighten(0.13, primaryColor) }} className="absolute z-10 -bottom-2 p-2 -right-2 rounded-md flex-col bg-custom-primary shadow-lg flex gap-2">
               <Menu.Item as={Fragment}>
                 <EditorButton
-                  onClick={() => editor.chain().focus().toggleBulletList().run()}
-                  data-active={editor.isActive('bulletList')}
-                >
-                  <TbList />
-                </EditorButton>
-              </Menu.Item>
-              <Menu.Item as={Fragment}>
-                <EditorButton
                   onClick={() => editor.chain().focus().toggleTaskList().run()}
                   data-active={editor.isActive('taskList')}
                 >
                   <TbListCheck />
+                </EditorButton>
+              </Menu.Item>
+              <Menu.Item as={Fragment}>
+                <EditorButton
+                  onClick={() => editor.chain().focus().toggleBulletList().run()}
+                  data-active={editor.isActive('bulletList')}
+                >
+                  <TbList />
                 </EditorButton>
               </Menu.Item>
             </Menu.Items>
@@ -123,19 +123,23 @@ export function Editor(): JSX.Element | null {
           </EditorButton>
         )}
         {deleteButtomEnabled && (
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <div className="bg-white p-4 rounded-md flex gap-4 flex-col">
+          <div onClick={() => setDeleteButtonEnabled(false)} className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div 
+              className="p-4 rounded-md flex gap-4 flex-col font-medium"
+              style={{ backgroundColor: lighten(0.13, primaryColor) }}
+            >
               <button
                 onClick={() => {
                   deleteNote(currentNoteID)
                   setDeleteButtonEnabled(false)
                 }}
-                className="text-red-500 hover:text-red-600 hover:underline"
+                className="text-red-500 flex gap-1 items-center hover:text-red-600 hover:underline"
               >
+                <TbTrash />
                 Excluir nota
               </button>
               <button 
-                className="text-blue-500 hover:text-blue-600 hover:underline"
+                className="text-custom-primary brightness-50 hover:brightness-0 hover:underline"
                 onClick={() => setDeleteButtonEnabled(false)}
               >
                 Manter
