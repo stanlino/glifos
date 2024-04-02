@@ -7,7 +7,7 @@
   },
   "package": {
     "productName": "glifos",
-    "version": "1.0.0"
+    "version": "1.0.1"
   },
   "tauri": {
     "allowlist": {
@@ -63,6 +63,14 @@
       "category": "Utility",
       "longDescription": "Glifos is a simple app to help you manage your notes and tasks.",
       "publisher": "Stanlino"
+    },
+    "updater": {
+      "active": true,
+      "endpoints": [
+        "https://raw.githubusercontent.com/stanlino/glifos/main/updates.json"
+      ],
+      "dialog": true,
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDUxODk4NEY3RDQ5RTlERkQKUldUOW5aN1U5NFNKVVVPZmlGdFZKeFhZRDV3UHdGNjVWUkhLemhyLzZJSHk0U1BxNUZHUEkyNUoK"
     }
   }
 }

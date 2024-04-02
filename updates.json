@@ -1,0 +1,11 @@
+{
+  "version": "v1.0.1",
+  "notes": "Add auto update feature",
+  "pub_date": "2024-04-01T00:00:00Z",
+  "platforms": {
+    "windows-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUOW5aN1U5NFNKVWFZNkNac1pNZWNxWHNqNVRVM25obEZqb1h2am4zS0ZJVWlMNFI2Rm45eWdES0hWdTVhYlIzaS9HN3drbkZSc2FHc3MxRGlEYURwUTJiWFhLS0FnT3c0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzEyMDE5MjgwCWZpbGU6Z2xpZm9zXzEuMC4xX3g2NC1zZXR1cC5uc2lzLnppcAp3L0pib3lOaWMvdDZKTWg2ejZlSmI2d0RLb1FZSzBpV296UjVRRXRjY3d5aEQvQTJsYUQrTXlvUVkzb2xjcU90U2s0WGllVjNpdjY2Rk83OEZsWEJCQT09Cg==",
+      "url": "https://github.com/stanlino/glifos/releases/download/1.0.1/glifos_1.0.1_x64-setup.nsis.zip"
+    }
+  }
+}
