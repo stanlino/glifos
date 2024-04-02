@@ -26,6 +26,7 @@ import { Uppercase } from '../../utils/tiptap/uppercase'
 import { Menu } from '@headlessui/react'
 import { useSettingsStore } from '../../store/settings.store'
 import { lighten } from 'polished'
+import { resetEditorContent } from '../../utils/tiptap/reset-editor'
 
 export function Editor(): JSX.Element | null {
   const { currentNoteID, getNote, updateNoteContent, deleteNote, notes } = useEditorStore()
@@ -47,7 +48,12 @@ export function Editor(): JSX.Element | null {
   })
 
   useEffect(() => {
-    editor?.commands.setContent(getNote(currentNoteID)?.content ?? '')
+    const onNoteChange = () => {
+      if (!editor) return
+      resetEditorContent(editor, getNote(currentNoteID)?.content ?? '')
+    }
+
+    onNoteChange()
   }, [currentNoteID])
 
   if (!editor) return null

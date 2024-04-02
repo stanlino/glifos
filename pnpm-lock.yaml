@@ -65,6 +65,9 @@ dependencies:
   postcss:
     specifier: ^8.4.38
     version: 8.4.38
+  prosemirror-state:
+    specifier: ^1.4.3
+    version: 1.4.3
   react:
     specifier: ^18.2.0
     version: 18.2.0
