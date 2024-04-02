@@ -1,6 +1,7 @@
 import {
   TbBold,
   TbItalic,
+  TbLetterCaseUpper,
   TbList,
   TbListCheck,
   TbStrikethrough,
@@ -19,12 +20,16 @@ import TextStyle from '@tiptap/extension-text-style'
 import { EditorButton } from './editor-button'
 import Link from '@tiptap/extension-link'
 import { useEditorStore } from '../../store/editor.store'
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { ResizableImage } from '../../utils/tiptap/resizable-image'
-import { FontSize } from '../../utils/tiptap/font-size'
+import { Uppercase } from '../../utils/tiptap/uppercase'
+import { Menu } from '@headlessui/react'
+import { useSettingsStore } from '../../store/settings.store'
+import { lighten } from 'polished'
 
 export function Editor(): JSX.Element | null {
   const { currentNoteID, getNote, updateNoteContent, deleteNote, notes } = useEditorStore()
+  const primaryColor = useSettingsStore(store => store.primaryColor)
 
   const [deleteButtomEnabled, setDeleteButtonEnabled] = useState(false)
 
@@ -79,17 +84,38 @@ export function Editor(): JSX.Element | null {
             <TbUnderline />
           </EditorButton>
           <EditorButton
-            onClick={() => editor.chain().focus().toggleBulletList().run()}
-            data-active={editor.isActive('bulletList')}
+            onClick={() => editor.chain().focus().toggleUppercase().run()}
+            data-active={editor.isActive('textStyle', { uppercase: true })}
           >
-            <TbList />
+            <TbLetterCaseUpper />
           </EditorButton>
-          <EditorButton
-            onClick={() => editor.chain().focus().toggleTaskList().run()}
-            data-active={editor.isActive('taskList')}
-          >
-            <TbListCheck />
-          </EditorButton>
+          <Menu as="div" className="relative">
+            <Menu.Button as="div">
+              <EditorButton
+                data-active={editor.isActive('bulletList') || editor.isActive('taskList')}
+              >
+                {editor.isActive('taskList') ? <TbListCheck /> : <TbList />}
+              </EditorButton>
+            </Menu.Button>
+            <Menu.Items style={{ backgroundColor: lighten(0.13, primaryColor) }} className="absolute z-10 -bottom-2 p-2 -right-2 rounded-md flex-col bg-custom-primary shadow-lg flex gap-2">
+              <Menu.Item as={Fragment}>
+                <EditorButton
+                  onClick={() => editor.chain().focus().toggleBulletList().run()}
+                  data-active={editor.isActive('bulletList')}
+                >
+                  <TbList />
+                </EditorButton>
+              </Menu.Item>
+              <Menu.Item as={Fragment}>
+                <EditorButton
+                  onClick={() => editor.chain().focus().toggleTaskList().run()}
+                  data-active={editor.isActive('taskList')}
+                >
+                  <TbListCheck />
+                </EditorButton>
+              </Menu.Item>
+            </Menu.Items>
+          </Menu>
         </div>
         {notes.length > 1 && (
           <EditorButton onClick={() => setDeleteButtonEnabled(true)}>
@@ -134,5 +160,5 @@ const extensions = [
   }),
   Link,
   TextStyle,
-  FontSize
+  Uppercase
 ]
