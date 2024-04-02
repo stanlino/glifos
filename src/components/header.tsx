@@ -15,6 +15,7 @@ export function Header(): JSX.Element {
     invoke('update_always_on_top_state')
   }, [windowPinned])
 
+
   return (
     <header data-tauri-drag-region className="bg-white bg-opacity-30 text-custom-text h-9 px-2 flex justify-between items-center">
       <div className="flex gap-2 items-center">

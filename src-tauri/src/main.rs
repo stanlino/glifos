@@ -3,9 +3,11 @@
 
 use auto_launch::AutoLaunchBuilder;
 use tauri::{App, CustomMenuItem, Error, Manager, PhysicalPosition, SystemTray, SystemTrayEvent, SystemTrayMenu};
-use std::sync::atomic::AtomicBool;
+use std::{sync::{atomic::AtomicBool, Mutex}, time::SystemTime};
 
 static WINDOW_ALWAYS_ON_TOP: AtomicBool = AtomicBool::new(false);
+static WINDOW_LOST_FOCUS_AT: Mutex<Option<SystemTime>> = Mutex::new(None);
+static IGNORE_UNFOCUS_UNTIL: Mutex<Option<SystemTime>> = Mutex::new(None);
 
 fn setup_system_tray(app: &App) -> Result<(), Error> {
     let handle = app.handle();
@@ -16,6 +18,9 @@ fn setup_system_tray(app: &App) -> Result<(), Error> {
         .on_event(move |event| {
             match event {
             SystemTrayEvent::LeftClick { .. } => {
+                if WINDOW_LOST_FOCUS_AT.lock().unwrap().unwrap().elapsed().unwrap().as_millis() < 250 {
+                    return;
+                }
                 let window = handle.get_window("main").unwrap();
                 if window.is_visible().unwrap() {
                     if window.is_focused().unwrap() {
@@ -59,6 +64,20 @@ fn setup_window(app: &App) -> Result<(), Error> {
         },
         Err(e) => println!("err: {}", e),
     }
+    let handle = app.handle();
+    window.on_window_event(move |event| {
+        println!("{:?}", event);
+        if let tauri::WindowEvent::Focused(false) = event {
+            if IGNORE_UNFOCUS_UNTIL.lock().unwrap().unwrap().elapsed().unwrap().as_secs() < 1 {
+                return;
+            }
+            if !WINDOW_ALWAYS_ON_TOP.load(std::sync::atomic::Ordering::SeqCst) {
+                let window = handle.get_window("main").unwrap();
+                window.hide().unwrap();
+                WINDOW_LOST_FOCUS_AT.lock().unwrap().replace(SystemTime::now());
+            }
+        }
+    });
     Ok(())
 }
 
@@ -67,7 +86,14 @@ fn update_always_on_top_state() {
     WINDOW_ALWAYS_ON_TOP.store(!WINDOW_ALWAYS_ON_TOP.load(std::sync::atomic::Ordering::SeqCst), std::sync::atomic::Ordering::SeqCst);
 }
 
+#[tauri::command]
+fn ignore_unfocus_for_a_second() {
+    IGNORE_UNFOCUS_UNTIL.lock().unwrap().replace(SystemTime::now());
+}
+
 fn setup_auto_launch(app: &App) -> Result<(), Error> {
+    WINDOW_LOST_FOCUS_AT.lock().unwrap().replace(SystemTime::now());
+    IGNORE_UNFOCUS_UNTIL.lock().unwrap().replace(SystemTime::now());
     let app_name = &app.package_info().name;
     let current_exe = std::env::current_exe().unwrap();
     let auto_start = AutoLaunchBuilder::new()
@@ -87,8 +113,7 @@ fn main() {
             setup_window(&app).unwrap();
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![update_always_on_top_state])
+        .invoke_handler(tauri::generate_handler![update_always_on_top_state, ignore_unfocus_for_a_second])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
-
