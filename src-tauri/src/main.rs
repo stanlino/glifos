@@ -27,6 +27,14 @@ fn setup_system_tray(app: &App) -> Result<(), Error> {
                     }
                 }
                 let window = handle.get_window("main").unwrap();
+                if WINDOW_ALWAYS_ON_TOP.load(std::sync::atomic::Ordering::SeqCst) {
+                    if window.is_visible().unwrap() {
+                        window.hide().unwrap();
+                    } else {
+                        window.show().unwrap();
+                    }
+                    return;
+                }
                 if window.is_visible().unwrap() {
                     if window.is_focused().unwrap() {
                         window.hide().unwrap();
