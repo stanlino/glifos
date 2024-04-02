@@ -1,11 +1,11 @@
 {
-  "version": "v1.1.0",
-  "notes": "Add auto update feature",
+  "version": "v1.2.0",
+  "notes": "Se at github.com/stanlino/glifos/releases/tag/1.2.0",
   "pub_date": "2024-04-01T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUOW5aN1U5NFNKVVhDMjBBMlJDT3YxOXZPSUlvZ0FpMUUyK01JRWJNZVpyaU1sTnFHVks0MWRtVlM1M0RDeHlqdnd5ak52MjRHcTg5cnA4YzJ5UlhyOTArM252MElZbGdJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzEyMDI1ODU0CWZpbGU6Z2xpZm9zXzEuMS4wX3g2NC1zZXR1cC5uc2lzLnppcAo4TkYwU0t5UnFVelVzakozbVh1dDRZT3BKd09JcVIzYlZoUHJsMXVXcjAyY0FVMm5DbzdMZnMwSmdFMmZhR3VFcjU2S0t1TWpVTndtMmZzTTJjVWVEZz09Cg==",
-      "url": "https://github.com/stanlino/glifos/releases/download/1.1.0/glifos_1.1.0_x64-setup.nsis.zip"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUOW5aN1U5NFNKVWNqbEZ3ZTBUTFluQXlkN3NIRGxiWWNxeGFRMXJMc2NIQTRGUnl1NFovM2V3S3llNUpsUERvSmhvV3FrUzlZVFprZ3ZQSWIwUHBLV2w3MnBNN0pSNVE0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzEyMDk0Njk4CWZpbGU6Z2xpZm9zXzEuMi4wX3g2NC1zZXR1cC5uc2lzLnppcApWY2RHaklFekhlOFhwQmp6MloxNjk3RWg3OWtsTGd4MVhvdlh3RlZsUHNkc1J6S243Vi90RFRGWDBiZjhBWmM0NjgwbWgwUTcxT0wwMXZYR0t6Z29EQT09Cg==",
+      "url": "https://github.com/stanlino/glifos/releases/download/1.2.0/glifos_1.2.0_x64-setup.nsis.zip"
     }
   }
 }
