@@ -1,9 +1,10 @@
 import { Menu } from '@headlessui/react'
 import { useEditorStore } from '../../store/editor.store'
 import { useSettingsStore } from '../../store/settings.store'
-import { darken, lighten } from 'polished'
+import { lighten, transparentize } from 'polished'
 import { useRef } from 'react'
 import { TbCheck, TbChevronDown } from 'react-icons/tb'
+import { FaRegStickyNote } from "react-icons/fa";
 
 export function EditorSelect(): JSX.Element {
   const { currentNoteID, getNote, notes, setCurrentNoteID, updateNoteTitle, addNote } =
@@ -34,28 +35,33 @@ export function EditorSelect(): JSX.Element {
         </Menu.Button>
       </div>
       <Menu.Items
-        className="absolute left-0 w-36 mt-3 z-30 origin-top-right overflow-hidden rounded-md shadow-lg focus:outline-none"
+        className="absolute left-0 w-40 mt-3 z-30 origin-top-right overflow-hidden rounded-md shadow-lg focus:outline-none"
         style={{ backgroundColor: lighten(0.13, primaryColor) }}
       >
-        {notes.map((note) => (
-          <Menu.Item key={note.id}>
-            <button
-              disabled={note.id === currentNoteID}
-              onClick={() => setCurrentNoteID(note.id)}
-              className="flex items-center w-full px-3 gap-2 py-2 hover:brightness-75 text-sm justify-between text-custom-text hover:text-white transition-all disabled:pointer-events-none"
-            >
-              <span className="line-clamp-1 text-left">{note.title || `Sem título`}</span>
-              {note.id === currentNoteID && <TbCheck className="min-w-4" />}
-            </button>
-          </Menu.Item>
-        ))}
+        <div className='max-h-56 overflow-y-auto'>
+          {notes.map((note) => (
+            <Menu.Item key={note.id}>
+              <button
+                onClick={() => setCurrentNoteID(note.id)}
+                className="flex items-center w-full px-2.5 gap-2 py-2 text-sm justify-between text-custom-text transition-all"
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = transparentize(0.5, primaryColor)}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+              >
+                <span className="line-clamp-1 text-left">{note.title || `Sem título`}</span>
+                {note.id === currentNoteID && <TbCheck className="min-w-4" />}
+              </button>
+            </Menu.Item>
+          ))}
+        </div>
         <Menu.Item>
           <button
             onClick={addNote}
-            className="flex items-center w-full px-2 py-2 text-sm text-white hover:brightness-110"
-            style={{ backgroundColor: darken(0.1, primaryColor) }}
+            className="flex items-center border-t gap-1.5 border-t-custom-primary w-full px-2.5 py-2 text-sm text-custom-text"
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = transparentize(0.5, primaryColor)}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
           >
-            Criar novo
+            <FaRegStickyNote className='pt-px' />
+            Nova nota
           </button>
         </Menu.Item>
       </Menu.Items>

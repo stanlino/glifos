@@ -23,14 +23,12 @@
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
   height: 12px;
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--secundary-color);
-  border-right: solid 6px var(--primary-color);
-  border-top: solid 16px var(--primary-color);
 }
 
 .tiptap {
