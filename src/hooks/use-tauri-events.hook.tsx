@@ -4,12 +4,12 @@ import { useEffect } from "react"
 
 export function useTauriEvents() {
   useEffect(() => {
-    const unlisten = async () => await listen<string>('open', (event) => {
+    const unlisten = listen<string>('open', (event) => {
       open(event.payload)
     })
 
     return () => {
-      unlisten()
+      unlisten.then(f => f());
     }
   }, [])
 }
