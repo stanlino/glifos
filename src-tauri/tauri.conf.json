@@ -6,8 +6,8 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "glifos",
-    "version": "1.2.1"
+    "productName": "Glifos",
+    "version": "1.2.2"
   },
   "tauri": {
     "allowlist": {
@@ -70,6 +70,10 @@
         "https://raw.githubusercontent.com/stanlino/glifos/main/updates.json"
       ],
       "dialog": false,
+      "windows": {
+        "installMode": "quiet",
+        "installerArgs": []
+      },
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDUxODk4NEY3RDQ5RTlERkQKUldUOW5aN1U5NFNKVVVPZmlGdFZKeFhZRDV3UHdGNjVWUkhLemhyLzZJSHk0U1BxNUZHUEkyNUoK"
     }
   }
