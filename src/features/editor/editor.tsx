@@ -142,11 +142,11 @@ export function Editor(): JSX.Element | null {
                 }}
                 className="text-red-500 flex gap-1 items-center hover:text-red-600 hover:underline"
               >
-                <TbTrash />
+                <TbTrash className='mb-px' />
                 Excluir nota
               </button>
               <button 
-                className="text-custom-primary brightness-50 hover:brightness-0 hover:underline"
+                className="text-custom-text hover:brightness-90 hover:underline"
                 onClick={() => setDeleteButtonEnabled(false)}
               >
                 Manter
