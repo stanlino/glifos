@@ -14,8 +14,11 @@ fn setup_system_tray(app: &App) -> Result<(), Error> {
     let handle = app.handle();
     SystemTray::new()
         .with_menu(SystemTrayMenu::new().add_item(
-            CustomMenuItem::new("quit".to_string(), "Quit")
+            CustomMenuItem::new("github".to_string(), "GitHub")
+        ).add_item(
+            CustomMenuItem::new("quit".to_string(), "Fechar")
         ))
+        .with_tooltip("Glifos")
         .on_event(move |event| {
             match event {
             SystemTrayEvent::LeftClick { .. } => {
@@ -49,6 +52,10 @@ fn setup_system_tray(app: &App) -> Result<(), Error> {
             SystemTrayEvent::MenuItemClick { id, .. } => {
                 if id == "quit" {
                     std::process::exit(0)
+                }
+                if id == "github" {
+                    let window = handle.get_window("main").unwrap();
+                    window.emit("open", "https://github.com/stanlino/glifos").unwrap();               
                 }
             }
             _ => {}

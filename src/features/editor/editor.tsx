@@ -27,6 +27,7 @@ import { Menu } from '@headlessui/react'
 import { useSettingsStore } from '../../store/settings.store'
 import { lighten } from 'polished'
 import { resetEditorContent } from '../../utils/tiptap/reset-editor'
+import { open } from '@tauri-apps/api/shell'
 
 export function Editor(): JSX.Element | null {
   const { currentNoteID, getNote, updateNoteContent, deleteNote, notes } = useEditorStore()
@@ -168,7 +169,14 @@ const extensions = [
     placeholder: 'Start typing...',
     emptyEditorClass: 'text-neutral-300'
   }),
-  Link,
+  Link.configure({
+    openOnClick: false,
+    HTMLAttributes: {
+      onclick: (event: any) => {
+        open(event.target.href)
+      }
+    }
+  }),
   TextStyle,
   Uppercase
 ]
