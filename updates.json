@@ -1,11 +1,11 @@
 {
-  "version": "v1.2.2",
-  "notes": "Se at github.com/stanlino/glifos/releases/tag/1.2.2",
-  "pub_date": "2024-04-01T00:00:00Z",
+  "version": "v1.3.0",
+  "notes": "Se at github.com/stanlino/glifos/releases/tag/1.3.0",
+  "pub_date": "2024-04-10T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUOW5aN1U5NFNKVVNvZkRLNW5oZHlwUVV5UEVMWnlXQVFiWE9lY0ZIaDcvTmo2TFpTQ2k3YUxjNTJOYnViTitndUVlMVE1M1dKcDBiMVd3VGU3Tk5iVldBTlZaZHlBQmd3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzEyNzE4MDc4CWZpbGU6R2xpZm9zXzEuMi4yX3g2NC1zZXR1cC5uc2lzLnppcAp0WVkzR09FeDVCSDBDSEkyNUU5TitVdytNSlZFbWIvQlgwd3oyY1BQVXNnaVpmOVN0Q3pYRkJranU0K3drdTRsbEFzSnNxVklrbXRSdC9XUjZrRmVBQT09Cg==",
-      "url": "https://github.com/stanlino/glifos/releases/download/1.2.2/glifos_1.2.2_x64-setup.nsis.zip"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUOW5aN1U5NFNKVVN6eTk0UmZpRW95VmpjRVJtSXZIZ3VyQlBsVCtOMVRGMG9YcmZqRGMwRmFreDFKMXpSTUZtRW9la3JQZFg1TFFYUGJ3R3FRN3BEMEN6OHcvRnBrVVFFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzEyNzI0MTQ4CWZpbGU6R2xpZm9zXzEuMy4wX3g2NC1zZXR1cC5uc2lzLnppcApaRVh1UnJQYnRiNTBYV2FqQk9IWkErQlVlVXBNNDM4YU1VR1QwVTlvYzc3VGZsUXd2UDFwU3NNVC9NVjl5eFRlMnhDRnhoU3pOMFV2cjZIYW82NjZCZz09Cg==",
+      "url": "https://github.com/stanlino/glifos/releases/download/1.3.0/Glifos_1.3.0_x64-setup.nsis.zip"
     }
   }
 }
