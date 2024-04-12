@@ -1,11 +1,11 @@
 import { useOnClickOutside } from '../hooks/use-onclick-outside'
 import { useSettingsStore } from '../store/settings.store'
-import { colors, darkColors } from '../utils/colors'
-import Github from '@uiw/react-color-github'
-import { darken, lighten, readableColor } from 'polished'
+import { darken, lighten, parseToRgb, readableColor } from 'polished'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { TbCheck, TbSettings, TbTextSize } from 'react-icons/tb'
+import { TbSettings, TbTextSize } from 'react-icons/tb'
 import { getVersion } from '@tauri-apps/api/app'
+import { HexColorPicker } from "react-colorful";
+import { open } from '@tauri-apps/api/shell'
 
 export function SettingsPopup(): JSX.Element {
   const [appVersion, setAppVersion] = useState<string | null>()
@@ -16,9 +16,19 @@ export function SettingsPopup(): JSX.Element {
   const ref = useRef<HTMLDivElement>(null)
 
   const handleColorPicker = useCallback((color: string) => {
-    document.documentElement.style.setProperty('--primary-color', color)
-    document.documentElement.style.setProperty('--text-color', readableColor(color))
-    document.documentElement.style.setProperty('--secundary-color', darken(0.2, color))
+    const primary = parseToRgb(color)
+    document.documentElement.style.setProperty('--primary-color', `${primary.red} ${primary.green} ${primary.blue}`)
+
+    const readable = readableColor(color)
+    const accent = parseToRgb(readable)
+    document.documentElement.style.setProperty('--accent-color', `${accent.red} ${accent.green} ${accent.blue}`)
+
+    const juice = readable === '#000' ? darken : lighten
+    const highlight = parseToRgb(juice(0.1, color))
+    document.documentElement.style.setProperty('--highlight-color', `${highlight.red} ${highlight.green} ${highlight.blue}`)
+
+    document.documentElement.style.setProperty('--scrollbar-color', juice(0.2, color))
+    
     setPrimaryColor(color)
   }, [])
 
@@ -44,46 +54,27 @@ export function SettingsPopup(): JSX.Element {
         <TbSettings />
       </button>
       {showColorPicker && (
-        <div className="absolute z-10 top-11 p-1 px-2 right-3 rounded-lg flex gap-1 flex-col border border-custom-primary" style={{ backgroundColor: lighten(0.13, primaryColor) }}>
-          <div className='flex gap-2 text-sm py-1 text-custom-text items-center text-opacity-75'>
-            <TbTextSize className="text-xl" />
-            <button data-checked={fontSize === 12} className='flex items-center gap-1 border flex-1 bg-white/20 rounded-md border-white/20 justify-center py-px data-[checked=true]:bg-white/50 data-[checked=true]:text-white' onClick={handleSelectFontSize(12)}>
+        <div className="absolute z-10 top-11 p-1 px-2 right-3 rounded-lg flex gap-1 flex-col border border-primary bg-highlight">
+          <div className='flex gap-1 text-sm py-1 text-accent items-center text-opacity-75'>
+            <TbTextSize className="text-2xl text-accent mx-1" />
+            <button data-checked={fontSize === 12} className='flex items-center outline-none gap-1 border flex-1 bg-accent/10 rounded-md border-primary justify-center py-1 data-[checked=true]:bg-accent/30 data-[checked=true]:scale-90 active:scale-75 transition-all text-accent' onClick={handleSelectFontSize(12)}>
               <span>12px</span>
             </button>
-            <button data-checked={fontSize === 14} className='flex items-center gap-1 border flex-1 bg-white/20 rounded-md border-white/20 justify-center py-px data-[checked=true]:bg-white/50 data-[checked=true]:text-white' onClick={handleSelectFontSize(14)}>
+            <button data-checked={fontSize === 14} className='flex items-center outline-none gap-1 border flex-1 bg-accent/10 rounded-md border-primary justify-center py-1 data-[checked=true]:bg-accent/30 data-[checked=true]:scale-90 active:scale-75 transition-all text-accent' onClick={handleSelectFontSize(14)}>
               <span>14px</span>
             </button>
-            <button data-checked={fontSize === 16} className='flex items-center gap-1 border flex-1 bg-white/20 rounded-md border-white/20 justify-center py-px data-[checked=true]:bg-white/50 data-[checked=true]:text-white' onClick={handleSelectFontSize(16)}>
+            <button data-checked={fontSize === 16} className='flex items-center outline-none gap-1 border flex-1 bg-accent/10 rounded-md border-primary justify-center py-1 data-[checked=true]:bg-accent/30 data-[checked=true]:scale-90 active:scale-75 transition-all text-accent' onClick={handleSelectFontSize(16)}>
               <span>16px</span>
             </button>
           </div>
-          <Github
-            colors={[...darkColors, ...Object.values(colors).map((color) => color[500])]}
+          <HexColorPicker
             color={primaryColor}
-            onChange={({ hex }) => handleColorPicker(hex)}
-            rectRender={({ checked, color, onClick }) => (
-              <div
-                style={{
-                  width: 25,
-                  height: 25,
-                  backgroundColor: color,
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-                onClick={onClick}
-              >
-                <TbCheck className="text-custom-text text-lg" style={{ display: checked ? 'block' : 'none' }} />
-              </div>
-            )}
-            className="max-w-48"
-            placement={'' as unknown as undefined}
-            style={{ width: 175, border: 'none', borderRadius: 4, overflow: 'hidden', padding: 0 }}
+            onChange={handleColorPicker}
+            style={{ height: 148 }}
           />
-          <div className='flex gap-2 text-xs p-1 justify-center text-custom-text items-center opacity-50'>
+          <button onClick={() => open('https://github.com/stanlino/glifos')} className='flex gap-2 text-xs p-1 justify-center text-accent items-center hover:underline hover:opacity-100'>
             <span>Glifos {appVersion}</span>
-          </div>
+          </button>
         </div>
       )}
     </div>

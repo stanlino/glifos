@@ -17,7 +17,7 @@ export function Header(): JSX.Element {
 
 
   return (
-    <header data-tauri-drag-region className="bg-white bg-opacity-30 text-custom-text h-9 px-2 flex justify-between items-center">
+    <header data-tauri-drag-region className="bg-highlight text-accent h-9 px-2 flex justify-between items-center">
       <div className="flex gap-2 items-center">
         {notes.length > 1 && <EditorSelect />}
         {notes.length <= 1 && (

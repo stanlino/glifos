@@ -6,7 +6,8 @@ import {
   TbListCheck,
   TbStrikethrough,
   TbTrash,
-  TbUnderline
+  TbUnderline,
+  TbX
 } from 'react-icons/tb'
 import { EditorContent, useEditor } from '@tiptap/react'
 
@@ -24,14 +25,11 @@ import { Fragment, useEffect, useState } from 'react'
 import { ResizableImage } from '../../utils/tiptap/resizable-image'
 import { Uppercase } from '../../utils/tiptap/uppercase'
 import { Menu } from '@headlessui/react'
-import { useSettingsStore } from '../../store/settings.store'
-import { lighten } from 'polished'
 import { resetEditorContent } from '../../utils/tiptap/reset-editor'
 import { open } from '@tauri-apps/api/shell'
 
 export function Editor(): JSX.Element | null {
   const { currentNoteID, getNote, updateNoteContent, deleteNote, notes } = useEditorStore()
-  const primaryColor = useSettingsStore(store => store.primaryColor)
 
   const [deleteButtomEnabled, setDeleteButtonEnabled] = useState(false)
 
@@ -40,7 +38,7 @@ export function Editor(): JSX.Element | null {
     content: getNote(currentNoteID)?.content ?? '',
     editorProps: {
       attributes: {
-        class: 'w-screen p-4 h-full outline-none text-custom-text'
+        class: 'w-screen p-4 h-full outline-none text-accent'
       }
     },
     onUpdate({ editor }) {
@@ -104,7 +102,7 @@ export function Editor(): JSX.Element | null {
                 {editor.isActive('taskList') ? <TbListCheck /> : <TbList />}
               </EditorButton>
             </Menu.Button>
-            <Menu.Items style={{ backgroundColor: lighten(0.13, primaryColor) }} className="absolute z-10 -bottom-2 p-2 -right-2 rounded-md flex-col bg-custom-primary shadow-lg flex gap-2">
+            <Menu.Items className="absolute z-10 bg-highlight -bottom-2 p-2 -right-2 rounded-md flex-col shadow-lg flex gap-2">
               <Menu.Item as={Fragment}>
                 <EditorButton
                   onClick={() => editor.chain().focus().toggleTaskList().run()}
@@ -132,24 +130,23 @@ export function Editor(): JSX.Element | null {
         {deleteButtomEnabled && (
           <div onClick={() => setDeleteButtonEnabled(false)} className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
             <div 
-              className="p-4 rounded-md flex gap-4 flex-col font-medium"
-              style={{ backgroundColor: lighten(0.13, primaryColor) }}
+              className="p-5 pr-7 relative rounded-md flex gap-4 flex-col font-medium bg-highlight"
             >
+              <button
+                onClick={() => setDeleteButtonEnabled(false)}
+                className="absolute -top-2 -right-2 bg-primary p-1 rounded-full hover:scale-110 transition-all flex items-center justify-center"
+              >
+                <TbX className='mb-px' />
+              </button>
               <button
                 onClick={() => {
                   deleteNote(currentNoteID)
                   setDeleteButtonEnabled(false)
                 }}
-                className="text-red-500 flex gap-1 items-center hover:text-red-600 hover:underline"
+                className="text-accent text-sm flex gap-1 items-center hover:text-accent hover:underline"
               >
                 <TbTrash className='mb-px' />
                 Excluir nota
-              </button>
-              <button 
-                className="text-custom-text hover:brightness-90 hover:underline"
-                onClick={() => setDeleteButtonEnabled(false)}
-              >
-                Manter
               </button>
             </div>
           </div>
@@ -172,6 +169,7 @@ const extensions = [
   Link.configure({
     openOnClick: false,
     HTMLAttributes: {
+      class: 'underline cursor-pointer text-accent hover:text-accent/50 transition-all',
       onclick: (event: any) => {
         open(event.target.href)
       }

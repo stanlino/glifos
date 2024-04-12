@@ -4,9 +4,11 @@
 
 @layer base {
   :root {
-    --primary-color: #121214;
-    --text-color: #e1e1e6;
-    --secundary-color: #202024;
+    --primary-color: 180 164 219; 
+    --accent-color: 0 0 0; 
+    --highlight-color: 150 127 205; 
+    --scrollbar-color: #785bbe;
+
     --font-size: 16px;
   }
 
@@ -14,8 +16,8 @@
     user-select: none;
     width: 100vw;
     height: 100vh;
-    background-color: var(--primary-color);
-    color: var(--text-color);
+    background-color: rgb(var(--primary-color));
+    color: rgb(var(--accent-color));
     border-radius: 8px;
     overflow: hidden;
     font-family: 'Poppins', sans-serif;
@@ -28,7 +30,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--secundary-color);
+  background-color: var(--scrollbar-color);
 }
 
 .tiptap {
@@ -55,16 +57,6 @@
 
 .tiptap h3 {
   font-size: 115%;
-}
-
-.tiptap a {
-  color: #007bff;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.tiptap a:hover {
-  text-decoration: underline;
 }
 
 .tiptap ul {
@@ -100,7 +92,7 @@
   height: var(--font-size);
   max-width: 16px;
   max-height: 16px;
-  accent-color: var(--secundary-color);
+  accent-color: rgb(var(--highlight-color));
 }
 
 .tiptap input[type='checkbox']:not(:checked) {
@@ -113,7 +105,7 @@
 
 .tiptap hr {
   border: 0;
-  border-top: 2px solid var(--text-color);
+  border-top: 2px solid rgb(var(--accent-color));
   opacity: 0.1;
   margin: 1rem 0;
 }
