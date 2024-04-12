@@ -10,8 +10,6 @@
     "tauri": "tauri"
   },
   "dependencies": {
-    "@electron-toolkit/preload": "^3.0.0",
-    "@electron-toolkit/utils": "^3.0.0",
     "@headlessui/react": "^1.7.18",
     "@tiptap/core": "^2.2.4",
     "@tiptap/extension-image": "^2.2.4",
@@ -25,7 +23,6 @@
     "@tiptap/pm": "^2.2.4",
     "@tiptap/react": "^2.2.4",
     "@tiptap/starter-kit": "^2.2.4",
-    "@uiw/react-color-github": "^2.1.1",
     "autoprefixer": "^10.4.19",
     "clsx": "^2.1.0",
     "polished": "^4.3.1",
