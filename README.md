@@ -1,7 +1,7 @@
 <img src="/images/banner.png" width="100%" />
 <div style="display:flex; flex-direction: row; justify-content: center">
 <img src="/images/1.png" width="33.2%" />
-<img src="/images/2.png" width="33.3%" />
+<img src="/images/2.png" width="33.2%" />
 <img src="/images/3.png" width="33.2%" />
 </div>
 
