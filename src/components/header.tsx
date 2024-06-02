@@ -34,7 +34,7 @@ export function Header(): JSX.Element {
       <input
         type="text"
         defaultValue={getNote(currentNoteID)?.title || 'Sem título'}
-        className="bg-transparent text-accent text-sm outline-none min-w-10 max-w-60 text-center"
+        className="bg-transparent translate-x-3 text-accent text-sm outline-none min-w-10 max-w-60 text-center"
         key={currentNoteID}
         onChange={(e) => updateNoteTitle(currentNoteID, e.currentTarget.value)}
         ref={(ref) => {

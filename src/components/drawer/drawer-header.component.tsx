@@ -8,7 +8,7 @@ interface DrawerHeaderProps {
 
 export function DrawerHeader({ onClose }: DrawerHeaderProps) {
   return (
-    <div className="flex items-start justify-between">
+    <div data-tauri-drag-region className="flex select-none items-start justify-between">
       <DialogTitle className="text-base font-semibold flex gap-2 items-center leading-6 text-white">
         <FaStickyNote className='h-5 w-5 text-yellow-200' />
         Glifos
