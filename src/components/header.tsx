@@ -2,8 +2,8 @@ import { useCallback, useReducer } from 'react'
 import { TbPinned, TbPinnedFilled, TbPlus } from 'react-icons/tb'
 import { SettingsPopup } from './settings-popup'
 import { useEditorStore } from '../store/editor.store'
-import { EditorSelect } from '../features/editor/editor-select'
 import { invoke, window as w } from '@tauri-apps/api'
+import { Drawer } from './drawer/drawer.component'
 
 export function Header(): JSX.Element {
   const [windowPinned, toggleWindowPin] = useReducer((state: boolean) => !state, false)
@@ -19,7 +19,7 @@ export function Header(): JSX.Element {
   return (
     <header data-tauri-drag-region className="bg-highlight text-accent h-9 px-2 flex justify-between items-center">
       <div className="flex gap-2 items-center">
-        {notes.length > 1 && <EditorSelect />}
+        {notes.length > 1 && <Drawer />}
         {notes.length <= 1 && (
           <button
             onClick={addNote}

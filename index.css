@@ -37,6 +37,10 @@
   font-size: var(--font-size);
 }
 
+.preview .tiptap {
+  font-size: 12px;
+}
+
 .tiptap p {
   margin: 0;
 }

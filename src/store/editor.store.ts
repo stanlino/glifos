@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { StateCreator, create } from 'zustand'
 import { persist } from 'zustand/middleware'
-
-interface Note {
-  id: string
-  title?: string
-  content: string
-}
+import { Note } from '../types/note'
 
 interface EditorStore {
   notes: Note[]
@@ -17,6 +12,9 @@ interface EditorStore {
   currentNoteID: string
   getNote(id: string): Note | undefined
   setCurrentNoteID(id: string): void
+  archivedNotes: string[]
+  archiveNote: (id: string) => void
+  unarchiveNote: (id: string) => void
 }
 
 const firstNoteID = Date.now().toString()
@@ -66,6 +64,27 @@ export const useEditorStore = create<EditorStore>(
           ...state,
           currentNoteID: id
         }))
+      },
+      archivedNotes: [],
+      archiveNote: (id) => {
+        set((state) => {
+          const note = state.notes.find((note) => note.id === id)
+          if (!note) return state
+          return {
+            ...state,
+            archivedNotes: [...state.archivedNotes, note.id]
+          }
+        })
+      },
+      unarchiveNote: (id) => {
+        set((state) => {
+          const note = state.archivedNotes.find((note) => note === id)
+          if (!note) return state
+          return {
+            ...state,
+            archivedNotes: state.archivedNotes.filter((note) => note !== id),
+          }
+        })
       }
     }),
     {
