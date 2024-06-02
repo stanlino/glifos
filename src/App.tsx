@@ -1,4 +1,4 @@
-import { Editor } from './features/editor/editor'
+import { Editor } from './components/editor/editor'
 import { Header } from './components/header'
 import { invoke } from '@tauri-apps/api'
 import { useDisableContextMenu } from './hooks/use-disable-context-menu'

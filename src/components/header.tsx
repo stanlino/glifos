@@ -1,4 +1,4 @@
-import { useCallback, useReducer } from 'react'
+import { useCallback, useReducer, useRef } from 'react'
 import { TbPinned, TbPinnedFilled, TbPlus } from 'react-icons/tb'
 import { SettingsPopup } from './settings-popup'
 import { useEditorStore } from '../store/editor.store'
@@ -7,7 +7,9 @@ import { Drawer } from './drawer/drawer.component'
 
 export function Header(): JSX.Element {
   const [windowPinned, toggleWindowPin] = useReducer((state: boolean) => !state, false)
-  const { addNote, notes } = useEditorStore()
+  const { addNote, notes, currentNoteID, getNote, updateNoteTitle } = useEditorStore()
+
+  const invisibleSpanRef = useRef<HTMLSpanElement>(null)
 
   const handleToggleWindowPin = useCallback(() => {
     w.getCurrent().setAlwaysOnTop(!windowPinned)
@@ -29,6 +31,19 @@ export function Header(): JSX.Element {
           </button>
         )}
       </div>
+      <input
+        type="text"
+        defaultValue={getNote(currentNoteID)?.title || 'Sem título'}
+        className="bg-transparent text-accent text-sm outline-none min-w-10 max-w-60 text-center"
+        key={currentNoteID}
+        onChange={(e) => updateNoteTitle(currentNoteID, e.currentTarget.value)}
+        ref={(ref) => {
+          if (!ref) return
+          if (!invisibleSpanRef.current) return
+          invisibleSpanRef.current.textContent = ref.value
+          ref.style.width = `${invisibleSpanRef.current.offsetWidth}px`
+        }}
+      />
       <div className="flex gap-2 px-1">
         <SettingsPopup />
         <button

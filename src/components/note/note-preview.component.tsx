@@ -36,7 +36,7 @@ export function NotePreview({ noteID }: NotePreviewProps) {
   return (
     <div className="flex flex-1 flex-col gap-2 select-none preview cursor-pointer max-h-28 overflow-hidden">
       <span className="text-white font-semibold">
-        {getNote(noteID)?.title ?? 'Untitled'}
+        {getNote(noteID)?.title ?? 'Sem título'}
       </span>
       {(getNote(noteID)?.content?.length ?? 0) > 7 && (
         <EditorContent editor={editor} />
