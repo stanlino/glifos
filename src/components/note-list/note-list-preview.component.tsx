@@ -17,7 +17,7 @@ interface NotePreviewProps {
   noteID: string
 }
 
-export function NotePreview({ noteID }: NotePreviewProps) {
+export function NoteListPreview({ noteID }: NotePreviewProps) {
   const { getNote } = useEditorStore()
 
   const editor = useEditor({

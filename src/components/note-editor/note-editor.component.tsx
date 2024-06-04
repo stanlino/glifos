@@ -18,7 +18,7 @@ import TaskItem from '@tiptap/extension-task-item'
 import Placeholder from '@tiptap/extension-placeholder'
 import TextStyle from '@tiptap/extension-text-style'
 
-import { EditorButton } from './editor-button'
+import { EditorButton } from './note-editor-tool-button.component'
 import Link from '@tiptap/extension-link'
 import { useEditorStore } from '../../store/editor.store'
 import { Fragment, useEffect, useState } from 'react'

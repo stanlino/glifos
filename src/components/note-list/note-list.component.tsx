@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useEditorStore } from "../../store/editor.store";
-import { NotePreview } from "./note-preview.component";
+import { NoteListPreview } from "./note-list-preview.component";
 import { TbArchive, TbArchiveOff } from "react-icons/tb";
 
 interface NoteGridListProps {
@@ -47,7 +47,7 @@ export function NoteList({ listType, toggleDrawer }: NoteGridListProps) {
             onClick={handleNoteClick(note.id)}
             className="flex cursor-pointer border hover:bg-neutral-600 border-neutral-600 bg-neutral-700 rounded-sm items-center p-2 text-sm transition-all"
           >
-            <NotePreview noteID={note.id} />
+            <NoteListPreview noteID={note.id} />
           </div>
         </div>
       ))}

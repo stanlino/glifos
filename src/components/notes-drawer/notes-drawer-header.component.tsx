@@ -6,7 +6,7 @@ interface DrawerHeaderProps {
   onClose: () => void
 }
 
-export function DrawerHeader({ onClose }: DrawerHeaderProps) {
+export function NotesDrawerHeader({ onClose }: DrawerHeaderProps) {
   return (
     <div data-tauri-drag-region className="flex select-none items-start justify-between">
       <DialogTitle className="text-base font-semibold flex gap-2 items-center leading-6 text-white">

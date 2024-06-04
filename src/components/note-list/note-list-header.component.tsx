@@ -8,7 +8,7 @@ interface NoteGridListHeaderProps {
   toggleDrawer: () => void
 }
 
-export function NoteGridListHeader({ listType, toggleListType, toggleDrawer }: NoteGridListHeaderProps) {
+export function NoteListHeader({ listType, toggleListType, toggleDrawer }: NoteGridListHeaderProps) {
   const addNote = useEditorStore(store => store.addNote)
 
   const handleAddNote = useCallback(() => {

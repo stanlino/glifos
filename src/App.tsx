@@ -1,5 +1,5 @@
-import { Editor } from './components/editor/editor'
-import { Header } from './components/header'
+import { Editor } from './components/note-editor/note-editor.component'
+import { Header } from './components/header/header.component'
 import { invoke } from '@tauri-apps/api'
 import { useDisableContextMenu } from './hooks/use-disable-context-menu'
 import { useUpdater } from './hooks/use-updater'
