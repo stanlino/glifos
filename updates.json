@@ -1,11 +1,11 @@
 {
-  "version": "v1.4.0",
-  "notes": "Se at github.com/stanlino/glifos/releases/tag/1.4.0",
+  "version": "v1.5.0",
+  "notes": "Se at github.com/stanlino/glifos/releases/tag/1.5.0",
   "pub_date": "2024-04-12T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
       "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUOW5aN1U5NFNKVVc0MGZuNHdoUm1ET1Z6ZWQwSGRLOU1VMHV6VnFCSDgrQXBya0NYU1Q5SExCNUZCdUl2TFBjMmRWK3MxbnR2VE4zK21qcHFaOU56NlVTZTVsMUxJUEFRPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzEyODk3MzMzCWZpbGU6R2xpZm9zXzEuNC4wX3g2NC1zZXR1cC5uc2lzLnppcAowckJwbUVYK1A5TXB1MG1QSDQ5OTNjTEpWR2E5RkttUmpLVlpVS3gzZi9vWUNTdS92TXg5ZWhmdkhMRnl6YTBwa1hrUUd4SkRGNmZMTEhxUVZoZmdCQT09Cg==",
-      "url": "https://github.com/stanlino/glifos/releases/download/1.4.0/Glifos_1.4.0_x64-setup.nsis.zip"
+      "url": "https://github.com/stanlino/glifos/releases/download/1.5.0/Glifos_1.5.0_x64-setup.nsis.zip"
     }
   }
 }
