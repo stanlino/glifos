@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import { useEditorStore } from "../../store/editor.store";
 import { NoteListPreview } from "./note-list-preview.component";
 import { TbArchive, TbArchiveOff } from "react-icons/tb";
+import { MdDraw } from "react-icons/md";
 
 interface NoteGridListProps {
   listType: 'default' | 'archived'
@@ -23,8 +24,9 @@ export function NoteList({ listType, toggleDrawer }: NoteGridListProps) {
   return (
     <div className="flex flex-1 flex-col gap-2">
       {!noteList.length && (
-        <div className="flex flex-1 justify-center items-center text-white">
-          <span className="text-sm text-neutral-400 pb-16">
+        <div className="flex flex-1 flex-col justify-center items-center text-neutral-400">
+          <MdDraw className="h-12 w-12" />
+          <span className="text-sm text-neutral-400 px-16 py-4 text-center">
             {listType === 'default' ? 'Suas notas aparecerão aqui.' : 'Suas notas arquivadas aparecerão aqui.'}
           </span>
         </div>
