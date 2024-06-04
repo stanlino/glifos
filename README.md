@@ -1,4 +1,3 @@
-<img src="/images/banner.png" width="100%" />
 <div style="display:flex; flex-direction: row; justify-content: center">
 <img src="/images/1.png" width="32.8%" />
 <img src="/images/2.png" width="32.8%" />
